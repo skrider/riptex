@@ -1,5 +1,7 @@
 # rIpTeX
 
+## background
+
 I spend a lot of time writing equations for school, mainly for homework assignments. To get faster at this I switched to using LaTeX embedded inside markdown files, mainly to leverage the almighty power of snippets and ctrl-c ctrl-v. My workflow comes out to: type equation, copy and paste it onto next line, alter equation in such a way that is logically valid but gets me closer to my goal of solving it, repeat until solved. Example:
 
 ```latex
@@ -21,4 +23,9 @@ To streamline this process even more, I want to write a tool that accelerates th
 
 rIpTeX is a time-independent REPL-like CLI application for LaTeX. In a rIpTeX session, the user will type in an equation and proceed to transform it until the desired result has been reached. Each "REP" cycle constitutes one step in this process. The user can "time travel" within their session and make upstream changes, such as a forgotten negative sign, or switching a variable name. rIpTeX will then use a heuristic to attempt to propagate the change to downstream steps, saving the user from having to manually make this change. When the user is done, rIpTeX will export the equation to plaintext format.
 
-rIpTeX will have a modular architecture, enabling *future* features such as autocompletion, snippets, versatile exporting, potentially things like equation graphing and symbolic manipulation, and more to be added.
+rIpTeX will have a modular architecture, enabling *future* features such as autocompletion, snippets, versatile exporting, potentially things like graphing and powerful symbolic manipulation, and more to be added.
+
+See [man](man.md) for more.
+
+## arch
+
