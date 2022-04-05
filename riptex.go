@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/skrider/riptex/commands"
 )
 
 func main() {
@@ -11,5 +12,7 @@ func main() {
 	flag.Parse()
 	if *version || *v {
 		fmt.Println("0.0.0")
+	} else {
+		commands.Default()
 	}
 }
