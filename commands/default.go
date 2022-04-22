@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 	"github.com/skrider/riptex/buffer"
 )
 
@@ -18,10 +19,11 @@ type model struct {
 }
 
 func initialModel() model {
-	return model{
+	m := model{
 		input:  buffer.NewBuffer(),
 		cursor: 0,
 	}
+	return m
 }
 
 func (m model) Init() tea.Cmd {
@@ -36,6 +38,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		case tea.KeyBackspace:
 			m.input.Delete(1)
+		case tea.KeyLeft:
+			m.input.MoveCursorRelative(-1)
+		case tea.KeyRight:
+			m.input.MoveCursorRelative(1)
 		case tea.KeyRunes:
 			m.input.Insert(msg.Runes)
 		}
@@ -43,12 +49,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-// var cursorStyle = lipgloss.NewStyle().Background(lipgloss.Color("#fa695f"))
+var cursorStyle = lipgloss.NewStyle().Background(lipgloss.Color("#fa695f"))
 
 func (m model) View() string {
 	var s strings.Builder
+	runes := append([]rune(m.input.String()), ' ')
 	fmt.Fprint(&s, "Write something: ")
-	fmt.Fprint(&s, m.input.String())
+	for i, ch := range runes {
+		if i == m.input.Cursor() {
+			fmt.Fprint(&s, cursorStyle.Render(string(ch)))
+		} else {
+			fmt.Fprint(&s, string(ch))
+		}
+	}
 	return s.String()
 }
 
