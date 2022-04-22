@@ -34,6 +34,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.Type {
 		case tea.KeyEscape:
 			return m, tea.Quit
+		case tea.KeyBackspace:
+			m.input.Delete(1)
 		case tea.KeyRunes:
 			m.input.Insert(msg.Runes)
 		}

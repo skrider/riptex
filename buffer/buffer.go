@@ -10,7 +10,6 @@ type Buffer struct {
 	before []rune
 	edit   []rune
 	after  []rune
-	cursor int
 }
 
 func NewBuffer() Buffer {
@@ -23,6 +22,10 @@ func NewBuffer() Buffer {
 
 func (b *Buffer) Insert(s []rune) {
 	b.edit = append(b.edit, s...)
+}
+
+func (b *Buffer) Delete(n int) {
+	b.edit = b.edit[:len(b.edit)-n]
 }
 
 func (b *Buffer) String() string {
